@@ -23,7 +23,7 @@ termux-setup-storage
 ### Вариант 1: Автоматическая установка
 ```bash
 # Скачиваем скрипт установки
-curl -O https://raw.githubusercontent.com/your-username/DeepSeek/main/termux_setup.sh
+curl -O https://raw.githubusercontent.com/Dmitrij878/Bot/main/termux_setup.sh
 
 # Делаем исполняемым
 chmod +x termux_setup.sh
@@ -39,7 +39,7 @@ mkdir ~/DeepSeek
 cd ~/DeepSeek
 
 # Клонируем репозиторий
-git clone https://github.com/your-username/DeepSeek.git .
+git clone https://github.com/Dmitrij878/Bot.git .
 
 # Устанавливаем зависимости
 pip install -r requirements.txt

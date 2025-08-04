@@ -1,0 +1,18 @@
+   services:
+     - type: web
+       name: deepseek-bot
+       env: python
+       plan: free
+       buildCommand: ""
+       startCommand: python bot_aiogram.py
+       envVars:
+         - key: TELEGRAM_TOKEN
+           sync: false
+         - key: OPENROUTER_API_KEY
+           sync: false
+         - key: OWNER_ID
+           sync: false
+         - key: OWNER_IDS
+           sync: false
+         - key: LOG_CHAT_ID
+           sync: false

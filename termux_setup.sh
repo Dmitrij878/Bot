@@ -42,7 +42,81 @@ if [ -d ".git" ]; then
 else
     echo "📥 Клонирование репозитория..."
     # Замените на ваш репозиторий
-    git clone https://github.com/your-username/DeepSeek.git .
+    git clone https://github.com/Dmitrij878/Bot.git .
+    
+    # Проверяем, что файлы скачались
+    if [ ! -f "bot_aiogram.py" ]; then
+        echo "⚠️ Файлы бота не найдены в репозитории!"
+        echo "📋 Создаём базовые файлы..."
+        
+        # Создаём базовый bot_aiogram.py
+        cat > bot_aiogram.py << 'EOF'
+#!/usr/bin/env python3
+"""
+DeepSeek Telegram Bot
+Простой бот для работы с AI моделями
+"""
+
+import os
+import asyncio
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters import Command
+from dotenv import load_dotenv
+
+# Загружаем переменные окружения
+load_dotenv()
+
+# Инициализация бота
+bot = Bot(token=os.getenv('TELEGRAM_TOKEN'))
+dp = Dispatcher()
+
+@dp.message(Command("start"))
+async def cmd_start(message: types.Message):
+    await message.answer("🤖 Привет! Я DeepSeek бот.\n\nИспользуйте /help для получения справки.")
+
+@dp.message(Command("help"))
+async def cmd_help(message: types.Message):
+    help_text = """
+🤖 **DeepSeek Telegram Bot**
+
+**Основные команды:**
+/start - Запуск бота
+/help - Справка
+/profile - Ваш профиль
+/limits - Ваши лимиты
+
+**Для владельцев:**
+/ownerhelp - Команды владельца
+"""
+    await message.answer(help_text, parse_mode="Markdown")
+
+async def main():
+    print("🤖 Запуск DeepSeek Telegram Bot...")
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+EOF
+
+        # Создаём базовый requirements.txt
+        cat > requirements.txt << 'EOF'
+# Основные библиотеки для Telegram бота
+aiogram==3.4.1
+python-dotenv==1.0.0
+
+# HTTP клиент для API запросов
+aiohttp==3.9.1
+
+# База данных
+aiosqlite==0.19.0
+
+# Дополнительные утилиты
+langdetect==1.0.9
+pathlib2==2.3.7
+EOF
+
+        echo "✅ Базовые файлы созданы!"
+    fi
 fi
 
 # Устанавливаем pip если его нет
