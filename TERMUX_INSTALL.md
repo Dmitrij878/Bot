@@ -142,8 +142,16 @@ pkg install python-pip
 
 ### Ошибки зависимостей
 ```bash
+# Обычное исправление
 pip install --upgrade pip
 pip install -r requirements.txt --force-reinstall
+
+# Если проблемы с pydantic/pydantic-core
+bash fix_termux_deps.sh
+
+# Альтернативный способ
+pip install --only-binary=all aiogram python-dotenv aiohttp aiosqlite langdetect pathlib2
+pip install "pydantic>=2.0.0,<2.6.0" "pydantic-core>=2.0.0,<2.15.0"
 ```
 
 ### Проблемы с правами
